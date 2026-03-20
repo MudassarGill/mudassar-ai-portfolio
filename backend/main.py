@@ -2,8 +2,12 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
+import sys, os
+
+# Ensure the backend directory is in the system path so Render can find the modules
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
 import models, schemas
-import os
 from database import engine, get_db
 from typing import List
 

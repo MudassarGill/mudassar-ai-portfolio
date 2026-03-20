@@ -567,3 +567,72 @@ section {
     transition: width 2.5s cubic-bezier(0.1, 0.5, 0.1, 1);
     box-shadow: 0 0 15px var(--primary-color);
 }
+
+/* Light Mode Overrides */
+body.light-mode {
+    --text-color: #1a202c; 
+    --primary-color: #006eb5; /* Darker cyan for light mode readability */
+    --secondary-color: #5500c9; 
+    --glass-bg: rgba(255, 255, 255, 0.7); 
+    --glass-border: rgba(0, 0, 0, 0.1);
+    --neon-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode::after {
+    background: rgba(240, 245, 255, 0.85); /* Bright overlay to make background image light */
+}
+
+body.light-mode h3, 
+body.light-mode h4, 
+body.light-mode .project-info h3, 
+body.light-mode .cert-card h3,
+body.light-mode p,
+body.light-mode .typewriter,
+body.light-mode .contact-block h4,
+body.light-mode .contact-container h3,
+body.light-mode .skills-bars-container h3 {
+    color: #1a202c !important;
+}
+
+body.light-mode .timeline-content ul,
+body.light-mode .project-info p,
+body.light-mode .cert-card p,
+body.light-mode .contact-block a,
+body.light-mode .form-group label {
+    color: #4a5568 !important;
+}
+
+body.light-mode .social-icon,
+body.light-mode .form-group input,
+body.light-mode .form-group textarea {
+    color: #1a202c;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .navbar {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(240, 245, 255, 0.8));
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .logo {
+    background: linear-gradient(90deg, #006eb5, #5500c9);
+    -webkit-background-clip: text;
+    text-shadow: none;
+}
+body.light-mode .logo:hover {
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+body.light-mode .glass-card {
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+body.light-mode .glass-card:hover {
+    border-color: rgba(0, 110, 181, 0.3);
+}
+
+body.light-mode .skill-info span {
+    color: #1a202c !important;
+}
+body.light-mode .progress-bar {
+    background: rgba(0, 0, 0, 0.1);
+}
