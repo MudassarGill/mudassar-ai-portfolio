@@ -69,23 +69,13 @@ To run the application locally, you do not need to boot the HTML and Backend sep
 
 ---
 
-## 🌐 Making it Live (Global & Mobile Access)
+## 🌍 Live Demo & Connect
 
-### 1. View on your Mobile Phone instantly (Local Wi-Fi) 📱
-Want to test the website on your phone right now? Make sure your laptop and phone are on the **same Wi-Fi network**. Run this command instead:
-```bash
-uvicorn main:app --host 0.0.0.0 --port 8000
-```
-Then, open Chrome/Safari on your phone and type in your laptop's Wi-Fi IP address followed by the port (e.g., `http://192.168.1.15:8000`).
+This portfolio is officially live on the internet! 
 
-### 2. Deploy to the Global Internet (Available 24/7) 🌍
-To make your portfolio permanently available for recruiters to visit worldwide via a custom link, you need a free cloud hosting service:
-1. **GitHub Upload**: Push this entire project folder to a repository on GitHub.
-2. **Hosting with Render.com** (Recommended Free Flow):
-   * Create an account on **Render.com**.
-   * Select **"New Web Service"** and connect your GitHub repo.
-   * Render will automatically install your `requirements.txt` and you simply set the start command to: `uvicorn backend.main:app --host 0.0.0.0 --port $PORT`
-3. **Result**: You will get a completely free live URL (e.g., `mudassar-ai-portfolio.onrender.com`) that you can put right on your resume!
+Feel free to browse through the interactive AI components, review my dynamic ML projects, and check out my technical proficiencies. 
+
+If you are a recruiter, fellow developer, or just want to chat about Generative AI and MLOps, you can **reach out to me directly** through the Contact Form at the bottom of the live website, or connect with me via my LinkedIn and GitHub links provided in the footer.
 
 ---
 
