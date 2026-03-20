@@ -92,6 +92,64 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    // Scroll Intersections Observer for Animations
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                entry.target.classList.add('animate-show');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.glass-card, .section-title').forEach((el, index) => {
+        // Apply slide-in alternately based on index or element position
+        if (index % 2 === 0) {
+            el.classList.add('slide-in-left');
+        } else {
+            el.classList.add('slide-in-right');
+        }
+        observer.observe(el);
+    });
+
+    // Initialize Chart.js Skills Graph
+    const canvas = document.getElementById('skillsChart');
+    if (canvas && typeof Chart !== 'undefined') {
+        const ctx = canvas.getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Python', 'Machine Learning', 'Deep Learning', 'Generative AI & LLMs', 'Computer Vision/NLP', 'SQL & Databases', 'FastAPI'],
+                datasets: [{
+                    label: 'Technical Proficiency (%)',
+                    data: [95, 90, 85, 80, 85, 75, 80],
+                    backgroundColor: 'rgba(0, 240, 255, 0.4)',
+                    borderColor: 'rgba(0, 240, 255, 1)',
+                    borderWidth: 2,
+                    borderRadius: 8,
+                    hoverBackgroundColor: 'rgba(112, 0, 255, 0.6)'
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: { 
+                        beginAtZero: true, 
+                        max: 100,
+                        ticks: { color: '#e2e8f0', font: { family: "'Inter', sans-serif" } },
+                        grid: { color: 'rgba(255,255,255,0.05)' }
+                    },
+                    x: { 
+                        ticks: { color: '#00f0ff', font: { family: "'Inter', sans-serif" } },
+                        grid: { display: false }
+                    }
+                },
+                plugins: {
+                    legend: { labels: { color: '#fff', font: { family: "'Outfit', sans-serif" } } }
+                }
+            }
+        });
+    }
 });
 
 async function fetchProjects() {
@@ -103,9 +161,22 @@ async function fetchProjects() {
         const projects = await response.json();
         container.innerHTML = ''; // Clear loading
         
-        projects.forEach(project => {
+        // Reattach observer so newly fetched cards animate!
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('animate-show');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        projects.forEach((project, index) => {
             const card = document.createElement('div');
             card.className = 'project-card glass-card';
+            
+            // Add slide classes for animation dynamically based on index
+            card.classList.add(index % 2 === 0 ? 'slide-in-left' : 'slide-in-right');
+            
             card.innerHTML = `
                 <img src="${project.image_url || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=500&q=80'}" alt="${project.title}" class="project-img" loading="lazy">
                 <div class="project-info">
@@ -116,6 +187,7 @@ async function fetchProjects() {
                 </div>
             `;
             container.appendChild(card);
+            scrollObserver.observe(card); // Observe new card
         });
     } catch (error) {
         console.error("Error fetching projects:", error);

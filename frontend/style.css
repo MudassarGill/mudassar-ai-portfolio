@@ -21,20 +21,10 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     position: relative;
-}
-
-body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
-    background-size: 30px 30px;
-    z-index: -2;
+    background-image: url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=2000');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
 }
 
 body::after {
@@ -44,10 +34,7 @@ body::after {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-image: 
-        radial-gradient(ellipse at top left, rgba(112, 0, 255, 0.15), transparent 60%),
-        radial-gradient(ellipse at bottom right, rgba(0, 240, 255, 0.15), transparent 60%),
-        radial-gradient(circle at 50% 50%, rgba(5, 5, 16, 0.3), transparent 70%);
+    background: rgba(5, 5, 16, 0.85); /* Dark overlay */
     z-index: -1;
     pointer-events: none;
 }
@@ -144,6 +131,20 @@ h1, h2, h3, h4, .logo {
     font-size: 1rem;
     font-weight: 500;
     transition: color 0.3s;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px var(--primary-color);
 }
 
 .nav-links a:hover {
@@ -151,11 +152,18 @@ h1, h2, h3, h4, .logo {
     text-shadow: var(--neon-shadow);
 }
 
+.nav-links a:hover::after {
+    width: 100%;
+}
+
 .btn-contact {
     border: 1px solid var(--primary-color);
     padding: 0.5rem 1rem;
     border-radius: 8px;
     color: var(--primary-color) !important;
+}
+.btn-contact::after {
+    display: none; /* No line under contact button */
 }
 .btn-contact:hover {
     background: var(--primary-color);
@@ -167,6 +175,24 @@ h1, h2, h3, h4, .logo {
     display: none;
     font-size: 1.5rem;
     cursor: pointer;
+}
+
+/* Animations Scroll Intersections */
+.slide-in-left {
+    opacity: 0;
+    transform: translateX(-100px);
+    transition: all 0.8s ease-out;
+}
+
+.slide-in-right {
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 0.8s ease-out;
+}
+
+.animate-show {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
 }
 
 /* Buttons */
