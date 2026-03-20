@@ -34,7 +34,7 @@ body::after {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(5, 5, 16, 0.85); /* Dark overlay */
+    background: rgba(5, 5, 16, 0.65); /* Made lighter so image connects */
     z-index: -1;
     pointer-events: none;
 }
@@ -89,33 +89,33 @@ h1, h2, h3, h4, .logo {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 3%;
-    background: linear-gradient(135deg, rgba(5, 5, 16, 0.8), rgba(112, 0, 255, 0.15));
+    background: linear-gradient(135deg, rgba(20, 20, 35, 0.5), rgba(0, 240, 255, 0.15)); /* Lighter glass */
     backdrop-filter: blur(15px);
     z-index: 1000;
-    border: 1px solid var(--glass-border);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(0, 240, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(0, 240, 255, 0.1);
 }
 
 .logo {
-    font-size: 1.6rem;
+    font-size: 2.2rem;
     font-weight: 800;
-    color: #fff;
+    color: transparent;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
     text-decoration: none;
     letter-spacing: 2px;
+    font-style: italic;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    text-shadow: var(--neon-shadow);
-    transition: transform 0.3s ease;
-}
-
-.logo i {
-    color: var(--primary-color);
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
 }
 
 .logo:hover {
     transform: scale(1.05);
+    text-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
 }
 
 .nav-links {
