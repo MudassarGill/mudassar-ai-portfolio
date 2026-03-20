@@ -48,6 +48,11 @@ def get_projects(db: Session = Depends(get_db)):
     ]
     return mock_projects
 
+@app.get("/api/messages")
+def get_all_messages(db: Session = Depends(get_db)):
+    """Fetch all recruiter contact messages submitted through the portfolio."""
+    return db.query(models.Message).all()
+
 # Mount Static Files (Must be at the bottom so it doesn't override API routes)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FRONTEND_DIR = os.path.join(BASE_DIR, "frontend")
