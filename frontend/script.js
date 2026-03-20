@@ -84,8 +84,8 @@ document.addEventListener("DOMContentLoaded", () => {
             submitBtn.innerHTML = 'Sending... <i class="fas fa-spinner fa-spin"></i>';
 
             try {
-                // Pointing to FastAPI local server endpoint
-                const response = await fetch('http://127.0.0.1:8000/contact', {
+                // Pointing to the relative FastAPI server endpoint
+                const response = await fetch('/contact', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -181,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function fetchProjects() {
     const container = document.getElementById('projects-container');
     try {
-        const response = await fetch('http://127.0.0.1:8000/projects');
+        const response = await fetch('/projects');
         if (!response.ok) throw new Error("Failed to fetch");
         
         const projects = await response.json();
