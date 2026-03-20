@@ -112,43 +112,49 @@ document.addEventListener("DOMContentLoaded", () => {
         observer.observe(el);
     });
 
-    // Initialize Chart.js Skills Graph
-    const canvas = document.getElementById('skillsChart');
-    if (canvas && typeof Chart !== 'undefined') {
-        const ctx = canvas.getContext('2d');
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Python', 'Machine Learning', 'Deep Learning', 'Generative AI & LLMs', 'Computer Vision/NLP', 'SQL & Databases', 'FastAPI'],
-                datasets: [{
-                    label: 'Technical Proficiency (%)',
-                    data: [95, 90, 85, 80, 85, 75, 80],
-                    backgroundColor: 'rgba(0, 240, 255, 0.4)',
-                    borderColor: 'rgba(0, 240, 255, 1)',
-                    borderWidth: 2,
-                    borderRadius: 8,
-                    hoverBackgroundColor: 'rgba(112, 0, 255, 0.6)'
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: { 
-                        beginAtZero: true, 
-                        max: 100,
-                        ticks: { color: '#e2e8f0', font: { family: "'Inter', sans-serif" } },
-                        grid: { color: 'rgba(255,255,255,0.05)' }
-                    },
-                    x: { 
-                        ticks: { color: '#00f0ff', font: { family: "'Inter', sans-serif" } },
-                        grid: { display: false }
-                    }
-                },
-                plugins: {
-                    legend: { labels: { color: '#fff', font: { family: "'Outfit', sans-serif" } } }
+    // Initialize Real-time Progress Bars & Counters
+    const skillBarsContainer = document.querySelector('.skills-bars-container');
+    if (skillBarsContainer) {
+        const progressObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    
+                    // 1. Animate the bar widths
+                    const progressBars = entry.target.querySelectorAll('.progress');
+                    progressBars.forEach(bar => {
+                        const targetWidth = bar.getAttribute('data-width');
+                        // Small timeout to ensure DOM draws the 0 state first
+                        setTimeout(() => {
+                            bar.style.width = targetWidth;
+                        }, 100);
+                    });
+                    
+                    // 2. Animate the counters stepping up
+                    const counters = entry.target.querySelectorAll('.counter');
+                    counters.forEach(counter => {
+                        const max = parseInt(counter.getAttribute('data-target'));
+                        let count = 0;
+                        const updateCount = () => {
+                            const speed = 30; // 30 steps
+                            const inc = max / speed;
+                            if (count < max) {
+                                count += inc;
+                                counter.textContent = Math.ceil(count) + '%';
+                                setTimeout(updateCount, 40); // 40ms interval
+                            } else {
+                                counter.textContent = max + '%';
+                            }
+                        };
+                        updateCount();
+                    });
+
+                    // Stop observing once animated
+                    progressObserver.unobserve(entry.target);
                 }
-            }
-        });
+            });
+        }, { threshold: 0.5 }); // Trigger when 50% is visible
+        
+        progressObserver.observe(skillBarsContainer);
     }
 });
 
